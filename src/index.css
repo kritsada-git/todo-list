@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.main-column{
+  @apply bg-gradient-to-r from-blue-400 to-red-600;
+}
+
+.main-column th{
+  @apply p-2 text-white text-xl font-bold;
+}
