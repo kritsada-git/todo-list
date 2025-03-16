@@ -7,3 +7,7 @@
 .main-column th{
   @apply p-2 text-white text-xl font-bold;
 }
+
+tbody tr td{
+  @apply border;
+}
