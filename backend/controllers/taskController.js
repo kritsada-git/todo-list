@@ -11,14 +11,23 @@ export const getTasks = async (req, res) => {
 	}
 };
 
+export const getTasksByID = async (req, res) => {
+	const { id } = req.params;
+	try {
+		const [tasks] = await db.query("SELECT * FROM tasks WHERE owner = ?", [id]);
+		res.json(tasks);
+	} catch (error) {
+		res.status(500).json({ error: "Database error" });
+	}
+};
 
 // PUT
 export const addTask = async (req, res) => {
-	const { task, detail, start_date, due_date, status } = req.body;
+	const { task, detail, start_date, due_date, status , owner } = req.body;
 	try {
 		await db.query(
-			"INSERT INTO tasks (task, detail, start_date, due_date, status) VALUES (?, ?, ?, ?, ?)",
-			[task, detail, start_date, due_date, status]
+			"INSERT INTO tasks (task, detail, start_date, due_date, status , owner) VALUES (?, ?, ?, ?, ? , ?)",
+			[task, detail, start_date, due_date, status , owner]
 		);
 		res.json({ message: "Task added successfully" });
 	} catch (error) {
